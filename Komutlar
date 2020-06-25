@@ -1,0 +1,22 @@
+select TMUSTERİ.musterıAdı as 'Müşteri Adı',TMUSTERİ.musterıSoyadı as 'Müşteri Soyadı',TMUSTERİ.musteriTel as 'Müşteri Tel',
+TGIDA.gıdaAdı as 'Gıda Adı',TGIDA.gıdaTur as 'Gıda Türü',TSIRKET.sirketAdı as 'Şirket Adı',TSIRKET.sirketTel as 'Şirket Tel',
+TSIRKET.sirketMerkez as 'Merkez',TSATIS.musteriÖdedigiPara as 'Ödenen tutar'
+from TGIDA,TMUSTERİ,TSATIS,TSIRKET where TMUSTERİ.musterıNo=TSATIS.musteriNo and TSATIS.sirketNo=TSIRKET.sirketNo 
+and TGIDA.gıdaKodu=TMUSTERİ.musterıAlGıdaKodu
+
+insert into TSIRKET(sirketNo,sirketAdı,sirketMerkez,sirketTel,sirketFax,sirketMail) 
+values('20587','KUŞÇULAR','KUŞADASI','05048561475','02128541274','kusculargıda@outlook.com.tr')
+
+update TMUSTERİ set musterıAdı='Furkan',musterıSoyadı='Cimili',
+musterıDogTar='2000-09-22',musteriTel='05378946532'
+where musterıAlGıdaKodu in
+(Select TGIDA.gıdaKodu from TGIDA where TGIDA.gıdaAdı='MISIR') 
+
+ALTER TABLE TSIRKET ALTER COLUMN  sirketTel nvarchar(11)
+
+delete from TMUSTERİ where musterıDogTar<'2000-01-01'
+
+update TMUSTERİ set musterıAdı='Furkan',musterıSoyadı='Cimili',
+musterıDogTar='2000-09-22',musteriTel='05378946532'
+where musterıAlGıdaKodu in
+(Select TGIDA.gıdaKodu from TGIDA where TGIDA.gıdaAdı='MISIR')
